@@ -141,11 +141,39 @@ if (dots.length) {
 // Contact form
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = e.target.querySelector('.btn-primary span');
-        btn.textContent = 'Message Sent!';
-        setTimeout(() => { btn.textContent = 'Send Message'; e.target.reset(); }, 3000);
+        const btn = contactForm.querySelector('.btn-primary span');
+        const originalText = btn.textContent;
+        btn.textContent = 'Sending...';
+
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            topic: formData.get('topic'),
+            message: formData.get('message'),
+        };
+
+        try {
+            const res = await fetch('/api/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            if (res.ok) {
+                btn.textContent = 'Message Sent!';
+                contactForm.reset();
+            } else {
+                btn.textContent = result.error || 'Failed to send';
+            }
+        } catch (err) {
+            btn.textContent = 'Error. Try again.';
+        }
+
+        setTimeout(() => { btn.textContent = originalText; }, 4000);
     });
 }
 
