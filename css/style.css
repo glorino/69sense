@@ -51,7 +51,7 @@ nav.scrolled { background: rgba(10, 10, 10, .95); backdrop-filter: blur(20px); p
 .hero-subtitle { font-size: 1.1rem; color: var(--gray); max-width: 500px; margin: 0 0 2.5rem 0; line-height: 1.7; opacity: 0; animation: fadeInUp 1s ease forwards .9s; }
 .hero-buttons { display: flex; gap: 1.5rem; justify-content: flex-start; opacity: 0; animation: fadeInUp 1s ease forwards 1.1s; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; opacity: 0; animation: fadeInUp 1s ease forwards 1.5s; }
+.scroll-indicator { display: none; }
 .scroll-indicator span { font-size: .7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
 .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollBounce 2s ease-in-out infinite; }
 @keyframes scrollBounce { 0%, 100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(.5); opacity: .3; } }
