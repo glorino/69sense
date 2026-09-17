@@ -1,8 +1,31 @@
 const nodemailer = require("nodemailer");
 
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function sanitizeSubject(str) {
+  if (!str) return "";
+  return String(str).replace(/[\r\n]/g, "").substring(0, 200);
+}
+
+const ALLOWED_ORIGINS = [
+  "https://69sense.vercel.app",
+  "https://www.69sense.com",
+  "http://localhost:3000",
+];
+
 module.exports = async (req, res) => {
-  // CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  const origin = req.headers.origin || "";
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -20,23 +43,33 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Name, email, and message are required." });
   }
 
+  if (!process.env.SMTP_PASS) {
+    return res.status(500).json({ error: "Email service not configured." });
+  }
+
+  const cleanName = escapeHtml(name).substring(0, 100);
+  const cleanEmail = escapeHtml(email).substring(0, 100);
+  const cleanSubject = sanitizeSubject(subject);
+  const cleanTopic = escapeHtml(topic).substring(0, 50);
+  const cleanMessage = escapeHtml(message).substring(0, 5000);
+
+  const topicLabel = cleanTopic || "General Inquiry";
+
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.hostinger.com",
+    host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 465,
     secure: true,
     auth: {
-      user: process.env.SMTP_USER || "info@69sense.com",
+      user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
   });
 
-  const topicLabel = topic || "General Inquiry";
-
   const mailOptions = {
-    from: `"69 Sense Website" <${process.env.SMTP_USER || "info@69sense.com"}>`,
-    to: process.env.SMTP_USER || "info@69sense.com",
+    from: `"69 Sense Website" <${process.env.SMTP_USER}>`,
+    to: process.env.SMTP_USER,
     replyTo: email,
-    subject: `[69 Sense] ${topicLabel}: ${subject || name}`,
+    subject: `[69 Sense] ${topicLabel}: ${cleanSubject || cleanName}`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#0a0a0a;color:#ffffff;padding:30px;border:1px solid #D4A843;">
         <div style="text-align:center;padding-bottom:20px;border-bottom:2px solid #D4A843;">
@@ -47,23 +80,23 @@ module.exports = async (req, res) => {
           <table style="width:100%;border-collapse:collapse;">
             <tr>
               <td style="padding:10px 0;color:#888;width:120px;vertical-align:top;">Name:</td>
-              <td style="padding:10px 0;color:#fff;font-weight:bold;">${name}</td>
+              <td style="padding:10px 0;color:#fff;font-weight:bold;">${cleanName}</td>
             </tr>
             <tr>
               <td style="padding:10px 0;color:#888;width:120px;vertical-align:top;">Email:</td>
-              <td style="padding:10px 0;color:#D4A843;">${email}</td>
+              <td style="padding:10px 0;color:#D4A843;">${cleanEmail}</td>
             </tr>
             <tr>
               <td style="padding:10px 0;color:#888;width:120px;vertical-align:top;">Topic:</td>
               <td style="padding:10px 0;color:#fff;">${topicLabel}</td>
             </tr>
-            ${subject ? `<tr>
+            ${cleanSubject ? `<tr>
               <td style="padding:10px 0;color:#888;width:120px;vertical-align:top;">Subject:</td>
-              <td style="padding:10px 0;color:#fff;">${subject}</td>
+              <td style="padding:10px 0;color:#fff;">${escapeHtml(cleanSubject)}</td>
             </tr>` : ""}
             <tr>
               <td style="padding:10px 0;color:#888;width:120px;vertical-align:top;">Message:</td>
-              <td style="padding:10px 0;color:#fff;line-height:1.6;">${message.replace(/\n/g, "<br>")}</td>
+              <td style="padding:10px 0;color:#fff;line-height:1.6;">${cleanMessage.replace(/\n/g, "<br>")}</td>
             </tr>
           </table>
         </div>
@@ -78,7 +111,6 @@ module.exports = async (req, res) => {
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ success: true, message: "Email sent successfully!" });
   } catch (error) {
-    console.error("Email error:", error);
     return res.status(500).json({ error: "Failed to send email. Please try again." });
   }
 };

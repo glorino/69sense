@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - 69 Sense</title>
     <meta name="description" content="Get in touch with 69 Sense podcast. Bookings, collaborations, and inquiries.">
+    <meta name="theme-color" content="#0A0A0A">
+    <link rel="canonical" href="https://69sense.com/contact.html">
+    <meta property="og:title" content="Contact - 69 Sense">
+    <meta property="og:description" content="Get in touch with 69 Sense podcast. Bookings, collaborations, and inquiries.">
+    <meta property="og:image" content="https://69sense.com/images/logo.png">
+    <meta property="og:url" content="https://69sense.com/contact.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,7 +24,7 @@
     </div>
 
     <nav id="navbar">
-        <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="69 Sense" class="nav-logo-img"></a>
+        <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="69 Sense" class="nav-logo-img" width="180" height="45"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -24,7 +32,7 @@
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
-        <div class="hamburger" id="hamburger">
+        <div class="hamburger" id="hamburger" role="button" aria-label="Toggle navigation" aria-expanded="false" tabindex="0">
             <span></span><span></span><span></span>
         </div>
     </nav>
@@ -53,15 +61,18 @@
                     <a href="https://open.spotify.com/episode/5n7aUZeCRSla0xrYFDZcCR?si=2I9_DVIySHKu-X7mmdRbOw" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form" id="contactForm" novalidate>
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <label for="contact-name" class="sr-only">Your Name</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
+                    <label for="contact-email" class="sr-only">Your Email</label>
+                    <input type="email" id="contact-email" name="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <select name="topic" style="width:100%;padding:1rem 1.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;">
+                    <label for="contact-topic" class="sr-only">Topic</label>
+                    <select id="contact-topic" name="topic" style="width:100%;padding:1rem 1.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;">
                         <option value="" style="background:#111;">Select Topic</option>
                         <option value="guest" style="background:#111;">Be A Guest</option>
                         <option value="collab" style="background:#111;">Collaboration</option>
@@ -71,7 +82,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <label for="contact-message" class="sr-only">Your Message</label>
+                    <textarea id="contact-message" name="message" rows="5" placeholder="Your Message" required></textarea>
                 </div>
                 <button type="submit" class="btn-primary"><span>Send Message</span></button>
             </form>

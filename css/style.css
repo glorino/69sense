@@ -11,6 +11,9 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Screen reader only */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
 
@@ -235,4 +238,19 @@ footer { background: var(--darker); padding: 3rem 5%; text-align: center; border
     .about-stats { flex-direction: column; gap: 1.5rem; }
     .player-top { flex-direction: column; text-align: center; }
     .page-hero h1 { font-size: 2rem; }
+    .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width: 400px) {
+    .platforms-grid { grid-template-columns: 1fr; }
+}
+
+/* ACCESSIBILITY: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .hero-logo-img, .particle { animation: none !important; }
+    html { scroll-behavior: auto; }
 }
