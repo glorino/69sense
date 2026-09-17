@@ -8,6 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .embed-container { max-width: 800px; margin: 0 auto; }
+        .embed-container iframe { border-radius: 12px; }
+        .spotify-embed { width: 100%; }
+        .episode-card { background: linear-gradient(145deg, rgba(20,20,20,.8), rgba(10,10,10,.9)); border: 1px solid rgba(212,168,67,.1); padding: 2rem; margin-bottom: 2rem; transition: all .4s; }
+        .episode-card:hover { border-color: rgba(212,168,67,.3); box-shadow: 0 10px 40px rgba(212,168,67,.08); }
+        .episode-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .episode-num { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: var(--gold); opacity: .4; }
+        .episode-header h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+        .episode-header span { color: var(--gold); font-size: .85rem; letter-spacing: 1px; }
+        .episode-desc { color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; }
+        .episode-platforms { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .episode-platforms a { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1.2rem; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: var(--white); text-decoration: none; font-size: .85rem; font-weight: 500; transition: all .3s; }
+        .episode-platforms a:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+        .episode-platforms a i { color: var(--gold); }
+        .episode-platforms a:hover i { color: var(--black); }
+        .all-platforms { margin-top: 3rem; }
+    </style>
 </head>
 <body>
     <div class="preloader" id="preloader">
@@ -35,62 +53,12 @@
 
     <section>
         <div class="section-header">
-            <span class="section-label">Listen Now</span>
-            <h2 class="section-title">69 Sense Podcast</h2>
+            <span class="section-label">Featured Episode</span>
+            <h2 class="section-title">Listen Now</h2>
             <div class="section-line"></div>
         </div>
-        <div class="player-container" style="max-width:900px;">
-            <div class="player-top">
-                <div class="player-cover">
-                    <i class="fas fa-podcast"></i>
-                </div>
-                <div class="player-info">
-                    <h3>69 Sense Podcast</h3>
-                    <p>REAL TALK. REAL STORIES. DIFFERENT PERSPECTIVES.</p>
-                </div>
-            </div>
-            <ul class="player-track-list">
-                <li class="player-track active">
-                    <span class="track-num">01</span>
-                    <span class="track-name">Why 69 Sense? - The Beginning</span>
-                    <span class="track-duration">Watch</span>
-                    <a href="https://open.spotify.com/episode/5n7aUZeCRSla0xrYFDZcCR?si=2I9_DVIySHKu-X7mmdRbOw" target="_blank" class="track-play" style="opacity:1;text-decoration:none;"><i class="fab fa-spotify"></i></a>
-                </li>
-                <li class="player-track">
-                    <span class="track-num">02</span>
-                    <span class="track-name">Real Talk: Relationships & Love</span>
-                    <span class="track-duration">Watch</span>
-                    <a href="https://audiomack.com/jayeneza8" target="_blank" class="track-play" style="opacity:1;text-decoration:none;"><i class="fas fa-headphones"></i></a>
-                </li>
-                <li class="player-track">
-                    <span class="track-num">03</span>
-                    <span class="track-name">Money, Business & Life</span>
-                    <span class="track-duration">Watch</span>
-                    <a href="https://www.youtube.com/@69sense1" target="_blank" class="track-play" style="opacity:1;text-decoration:none;"><i class="fab fa-youtube"></i></a>
-                </li>
-                <li class="player-track">
-                    <span class="track-num">04</span>
-                    <span class="track-name">Faith & Everyday Life</span>
-                    <span class="track-duration">Watch</span>
-                    <a href="https://www.youtube.com/@69sense1" target="_blank" class="track-play" style="opacity:1;text-decoration:none;"><i class="fab fa-youtube"></i></a>
-                </li>
-                <li class="player-track">
-                    <span class="track-num">05</span>
-                    <span class="track-name">Society & Personal Growth</span>
-                    <span class="track-duration">Watch</span>
-                    <a href="https://www.tiktok.com/@69.sense" target="_blank" class="track-play" style="opacity:1;text-decoration:none;"><i class="fab fa-tiktok"></i></a>
-                </li>
-            </ul>
-            <div class="progress-bar" id="progressBar">
-                <div class="progress-fill" id="progressFill" style="width:100%;"></div>
-            </div>
-            <div class="player-controls">
-                <i class="fas fa-backward"></i>
-                <div class="play-btn" id="playBtn">
-                    <i class="fas fa-play" id="playIcon"></i>
-                </div>
-                <i class="fas fa-forward"></i>
-            </div>
+        <div class="embed-container">
+            <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/5n7aUZeCRSla0xrYFDZcCR?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     </section>
 
@@ -105,6 +73,103 @@
     </div>
 
     <section>
+        <div class="section-header">
+            <span class="section-label">All Episodes</span>
+            <h2 class="section-title">69 Sense Podcast</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div style="max-width:800px;margin:0 auto;">
+            <div class="episode-card">
+                <div class="episode-header">
+                    <span class="episode-num">01</span>
+                    <div>
+                        <h3>Why 69 Sense? - The Beginning</h3>
+                        <span>The Introduction Episode</span>
+                    </div>
+                </div>
+                <p class="episode-desc">Welcome to 69 Sense. In this first episode, we introduce the podcast, the hosts, and the vision behind creating a platform for real conversations about life, faith, business, and everything in between.</p>
+                <div class="episode-platforms">
+                    <a href="https://open.spotify.com/episode/5n7aUZeCRSla0xrYFDZcCR?si=2I9_DVIySHKu-X7mmdRbOw" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+                    <a href="https://audiomack.com/jayeneza8" target="_blank"><i class="fas fa-headphones"></i> Audiomack</a>
+                    <a href="https://www.youtube.com/@69sense1" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">
+                    <span class="episode-num">02</span>
+                    <div>
+                        <h3>Real Talk: Relationships & Love</h3>
+                        <span>Relationships & Lifestyle</span>
+                    </div>
+                </div>
+                <p class="episode-desc">We sit down to have an honest conversation about relationships, love, and what really matters when it comes to connecting with people. Expect real opinions and different perspectives.</p>
+                <div class="episode-platforms">
+                    <a href="https://audiomack.com/jayeneza8" target="_blank"><i class="fas fa-headphones"></i> Audiomack</a>
+                    <a href="https://www.youtube.com/@69sense1" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://www.tiktok.com/@69.sense" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">
+                    <span class="episode-num">03</span>
+                    <div>
+                        <h3>Money, Business & Life</h3>
+                        <span>Business & Entrepreneurship</span>
+                    </div>
+                </div>
+                <p class="episode-desc">From entrepreneurship to financial decisions, we talk about the real side of money and business that people rarely discuss openly. Lessons, mistakes, and everything in between.</p>
+                <div class="episode-platforms">
+                    <a href="https://www.youtube.com/@69sense1" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://audiomack.com/jayeneza8" target="_blank"><i class="fas fa-headphones"></i> Audiomack</a>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">
+                    <span class="episode-num">04</span>
+                    <div>
+                        <h3>Faith & Everyday Life</h3>
+                        <span>Faith & Personal Growth</span>
+                    </div>
+                </div>
+                <p class="episode-desc">How does faith fit into everyday life? We explore the intersection of spirituality, personal growth, and the real challenges people face daily.</p>
+                <div class="episode-platforms">
+                    <a href="https://www.youtube.com/@69sense1" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://www.tiktok.com/@69.sense" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+
+            <div class="episode-card">
+                <div class="episode-header">
+                    <span class="episode-num">05</span>
+                    <div>
+                        <h3>Society & Personal Growth</h3>
+                        <span>Society & Culture</span>
+                    </div>
+                </div>
+                <p class="episode-desc">We tackle the social issues, cultural norms, and personal growth topics that shape who we are and how we navigate the world around us.</p>
+                <div class="episode-platforms">
+                    <a href="https://www.tiktok.com/@69.sense" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://www.youtube.com/@69sense1" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-divider">
+        <div class="wave-bar" style="animation-delay:0s"></div>
+        <div class="wave-bar" style="animation-delay:0.15s"></div>
+        <div class="wave-bar" style="animation-delay:0.3s"></div>
+        <div class="wave-bar" style="animation-delay:0.45s"></div>
+        <div class="wave-bar" style="animation-delay:0.6s"></div>
+        <div class="wave-bar" style="animation-delay:0.75s"></div>
+        <div class="wave-bar" style="animation-delay:0.9s"></div>
+    </div>
+
+    <section class="all-platforms">
         <div class="section-header">
             <span class="section-label">Stream Everywhere</span>
             <h2 class="section-title">Choose Your Platform</h2>
